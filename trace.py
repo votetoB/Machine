@@ -14,12 +14,12 @@ class Point:
     def __str__(self):
         return ' '.join([str(arg) for arg in [self.x, self.y, self.s, self.t]])
 
+
 class Trace:
     def __init__(self, points=None):
         if points:
             assert all([isinstance(c, Point) for c in points])
             self.points = points
-
 
 class MachineTrace:
     def __init__(self, input_trace):
@@ -39,13 +39,18 @@ class MachineTrace:
                 return in_coords[c - 1].x, in_coords[c - 1].y
 
 
-class SupportCoord:
-    def __init__(self, coord):
-        self.coord = coord['x'], coord['y']
-        self.vector = coord['x_v'], coord['y_v']
+class SupportPoint:
+    def __init__(self, x, y, s, vec):
+        self.x = x
+        self.y = y
+        self.s = s
+        self.vector = vec
 
 
 class SupportTrace:
-    def __init__(self, coords):
-        assert isinstance(coords, SupportCoord)
-        self.coords = coords
+    def __init__(self, points):
+        assert all([isinstance(point, SupportPoint) for point in points])
+        self.points = points
+        self.ET = 0, 0
+        self.sign = None
+        self.energy = 5

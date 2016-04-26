@@ -6,88 +6,87 @@ FPS = 120
 
 
 def init_buttons(self):
-            self.buttons = dict()
-            prm = [
-                [u'Р', u'К', u'АК', u'В', u''],
-                [u'КР', u'ДА', u'ДУ', u'ДАУ', u'ВР'],
-                [u'22.5', u'45', u'90', u'180', u'360'],
-                [u'100', u'200', u'400', u'800', u''],
-                [u'ММ', u'МР', (u'СМ', False), u'БС', u'С'],
-            ]
-            pu = [
-                [u'1', u'2', u'3', u'4', u'ЗВ'],
-                [u'Э', u'ЭА', u'ЭС', u'П', u'ГЗ'],
-                [u'О', u'ОК', u'КС', u'', (u'ЗО', False)],
-                [u'ПР', u'ВЛ', u'ВВ', u'ЭТ', u'КТ'],
-                [u'СО', u'ОЗ', u'ОС', u'ИМ', (u'КЗ', False)]
-            ]
+    self.buttons = dict()
+    prm = [
+        [u'Р', u'К', u'АК', u'В', u''],
+        [u'КР', u'ДА', u'ДУ', u'ДАУ', u'ВР'],
+        [u'22.5', u'45', u'90', u'180', u'360'],
+        [u'100', u'200', u'400', u'800', u''],
+        [u'ММ', u'МР', (u'СМ', False), u'БС', u'С'],
+    ]
+    pu = [
+        [u'1', u'2', u'3', u'4', u'ЗВ'],
+        [u'Э', u'ЭА', u'ЭС', u'П', u'ГЗ'],
+        [u'О', u'ОК', u'КС', u'', (u'ЗО', False)],
+        [u'ПР', u'ВЛ', u'ВВ', u'ЭТ', u'КТ'],
+        [u'СО', u'ОЗ', u'ОС', u'ИМ', (u'КЗ', False)]
+    ]
 
-            bio_buttons = [u'Є', u'ЭА/ЭС', u'О/ОС', u'П/ГЗ', u'МДА', u'МО', u'ТРМ', u'ЗН', u'ЛИН', u'ЗУМ']
+    bio_buttons = [u'Є', u'ЭА/ЭС', u'О/ОС', u'П/ГЗ', u'МДА', u'МО', u'ТРМ', u'ЗН', u'ЛИН', u'ЗУМ']
 
-            buttons_texts41 = [repr(i) for i in range(1, 13)]
-            buttons_texts42 = [u'', u'', u'', (u'М4', False), (u'М5', False), u'', (u'М7', False), (u'М8', False), (u'М9', False), u'', (u'Х', False), (u'ЮК', False)]
-            buttons_texts43 = [u'ВВОД', u'1В', u'ЗП', u'СК1', u'СК2', u'ИС', u'№ВО', u'ПЗ', u'КО', u'ЛУПА', u'Ф', u'ИСТ', u'СБ']
+    buttons_texts41 = [repr(i) for i in range(1, 13)]
+    buttons_texts42 = [u'', u'', u'', u'М4', u'М5', u'', u'М7', u'М8', u'М9', u'', (u'Х', False), (u'ЮК', False)]
+    buttons_texts43 = [u'ВВОД', u'1В', u'ЗП', u'СК1', u'СК2', u'ИС', u'№ВО', u'ПЗ', u'КО', u'ЛУПА', u'Ф', u'ИСТ', u'СБ']
 
-            x, y = 460 * 1.6, 45 * 1.6
-            width, height = 24 * 1.6, 24 * 1.6
-            space = 5
+    x, y = 460 * 1.6, 45 * 1.6
+    width, height = 24 * 1.6, 24 * 1.6
+    space = 5
 
-            for row in prm:
-                x = 460 * 1.6
-                for el in row:
-                    if not isinstance(el, tuple):
-                        self.buttons[el] = Button(el, True, (100, 100, 100), (x, y), (width, height))
-                    else:
-                        self.buttons[el[0]] = Button(el[0], False, (100, 100, 100), (x, y), (width, height))
-
-                    x += width + space
-
-                y += height + space
-
-            y += space
-
-            for row in pu:
-                x = 460 * 1.6
-                for el in row:
-                    if not isinstance(el, tuple):
-                        self.buttons[el] = Button(el, True, (100, 100, 100), (x, y), (width, height))
-                    else:
-                        self.buttons[el[0]] = Button(el[0], False, (100, 100, 100), (x, y), (width, height))
-
-                    x += width + space
-
-                y += height + space
-
-            x = 50
-            y = 550
-            for el in bio_buttons:
+    for row in prm:
+        x = 460 * 1.6
+        for el in row:
+            if not isinstance(el, tuple):
                 self.buttons[el] = Button(el, True, (100, 100, 100), (x, y), (width, height))
-                x += width + space
+            else:
+                self.buttons[el[0]] = Button(el[0], False, (100, 100, 100), (x, y), (width, height))
+            x += width + space
 
-            y += height + space
-            x = 50
+        y += height + space
 
-            for el in buttons_texts41:
-                self.buttons[el + 'N'] = Button(el, False, (100, 100, 100), (x, y), (width, height))
-                x += width + space
+    y += space
 
-            y += height + space
+    for row in pu:
+        x = 460 * 1.6
+        for el in row:
+            if not isinstance(el, tuple):
+                self.buttons[el] = Button(el, True, (100, 100, 100), (x, y), (width, height))
+            else:
+                self.buttons[el[0]] = Button(el[0], False, (100, 100, 100), (x, y), (width, height))
 
-            x = 50
-            for el in buttons_texts42:
-                if not isinstance(el, tuple):
-                    self.buttons[el] = Button(el, True, (100, 100, 100), (x, y), (width, height))
-                else:
-                    self.buttons[el[0]] = Button(el[0], False, (100, 100, 100), (x, y), (width, height))
-                x += width + space
+            x += width + space
 
-            y += height + space
+        y += height + space
 
-            x = 50
-            for el in buttons_texts43:
-                self.buttons[el] = Button(el, False, (100, 100, 100), (x, y), (width, height))
+    x = 50
+    y = 550
+    for el in bio_buttons:
+        self.buttons[el] = Button(el, True, (100, 100, 100), (x, y), (width, height))
+        x += width + space
 
-                x += width + space
+    y += height + space
+    x = 50
+
+    for el in buttons_texts41:
+        self.buttons[el + 'N'] = Button(el, False, (100, 100, 100), (x, y), (width, height))
+        x += width + space
+
+    y += height + space
+
+    x = 50
+    for el in buttons_texts42:
+        if not isinstance(el, tuple):
+            self.buttons[el] = Button(el, True, (100, 100, 100), (x, y), (width, height))
+        else:
+            self.buttons[el[0]] = Button(el[0], False, (100, 100, 100), (x, y), (width, height))
+        x += width + space
+
+    y += height + space
+
+    x = 50
+    for el in buttons_texts43:
+        self.buttons[el] = Button(el, False, (100, 100, 100), (x, y), (width, height))
+
+        x += width + space
 
 
 class Button:

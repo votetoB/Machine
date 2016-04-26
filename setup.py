@@ -45,24 +45,24 @@ class BuildExe:
         self.script = "main.py"
  
         #Name of program
-        self.project_name = "MyApps"
+        self.project_name = "KZA"
  
         #Project url
         self.project_url = "about:none"
  
         #Version of program
-        self.project_version = "0.0"
+        self.project_version = "0.1"
  
         #License of the program
-        self.license = "MyApps License"
+        self.license = "Proprietary License"
  
         #Auhor of program
-        self.author_name = "Me"
-        self.author_email = "example@example.com"
-        self.copyright = "Copyright (c) 2009 Me."
+        self.author_name = "Botte Oleksandr"
+        self.author_email = "votetoB@gmail.com"
+        self.copyright = "Copyright (c) 2016 votetoB."
  
         #Description
-        self.project_description = "MyApps Description"
+        self.project_description = "KZA 86G6"
  
         #Icon file (None will use pygame default icon)
         self.icon_file = None
