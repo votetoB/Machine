@@ -4,10 +4,11 @@ import sys
 from pygame.locals import *
 from Button import init_buttons
 from Bio import Bio
+import time
 
 K = 1.6
 RIGHT_PANEL = 460
-FPS = 300
+FPS = 36
 MODES = [u'М4', u'М5', u'М7', u'М8', u'М9']
 TURN_ON_BUTTONS = [u'Р', u'КР', u'ММ', u'2', u'Э', u'ЭА', u'ЭТ', u'КТ', u'45', u'200'] + \
                   [u'Є', u'ЭА/ЭС', u'О/ОС', u'П/ГЗ', u'МДА', u'МО', u'ТРМ', u'ЗН', u'ЛИН', u'ЗУМ']
@@ -69,15 +70,17 @@ class App:
                 self.init_bio()
 
     def on_loop(self):
-        self.clock.tick(FPS)
         if self.is_on:
             self.bio.tick()
 
         self.analyze_stack()
 
     def on_render(self):
-        for key, val in self.buttons.items():
-            val.draw(self._display_surf)
+        start = time.time()
+        for val in self.buttons.itervalues():
+            if val.updated:
+                val.draw(self._display_surf)
+                val.updated = False
 
         self.bio.draw(self._display_surf, self)
 
@@ -93,8 +96,14 @@ class App:
         while self._running:
             for event in pygame.event.get():
                 self.on_event(event)
+            start = time.time()
             self.on_loop()
+            start = time.time()
             self.on_render()
+            start = time.time()
+            self.clock.tick(FPS)
+            ## print time.time() - start, "CLOCK"
+
         self.on_cleanup()
 
     def analyze_stack(self):

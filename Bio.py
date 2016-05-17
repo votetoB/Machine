@@ -42,7 +42,6 @@ class Bio:
             return (90 - answer) % 360
 
     def get_point_angle_diff(self, point):
-        print point, "ANGLE"
         return (math.acos(point[1] / (point[0] ** 2 + point[1] ** 2) ** 0.5) -
                 self.get_angle_in_radians()) % (2 * math.pi)
 
@@ -233,8 +232,18 @@ class Bio:
 
         surface.blit(s, (self.center[0] - self.radius, self.center[1] - self.radius))
 
-    @staticmethod
-    def draw_sign(s, point):
+    def draw_sign(self, s, point):
+        """
+        Draws ECHO signal
+        :param s: surface
+        :param point: point where to draw
+        :return: None
+        """
+        angle = Bio.get_point_angle_0(point)
+        center = 250, 250
+        r = math.hypot(center[0] - point[0], center[1] - point[1])
+        pygame.draw.arc(s, DEFAULT_COLOR, (center[0] - r, center[1] - r, 2 * r, 2 * r), -angle/180.0 * math.pi, -(angle - 5)/180.0 * math.pi, 2)
+
         # angle = math.acos(point[1] / (point[0] ** 2 + point[1] ** 2) ** 0.5)
         # start_point = 250 + 250 * math.cos(angle - 3 / 100.0), 250 + 250 * math.sin(angle - 3 / 100.0)
         # print start_point
@@ -242,19 +251,19 @@ class Bio:
         #     cur_point = 250 + 250 * math.cos(angle + i/100.0), 250 + 250 * math.sin(angle + i/100.0)
         #     pygame.draw.line(s, DEFAULT_COLOR, start_point, cur_point, 1)
         #     start_point = cur_point
-        color = DEFAULT_COLOR
+        # color = DEFAULT_COLOR
+        #
+        # if point[2] == 1:
+        #     # KNOWN
+        #     color = KNOWN_COLOR
+        # elif point[2] == 2:
+        #     # ALIEN
+        #     color = ALIEN_COLOR
+        # elif point[2] == 3:
+        #     # DISASTER
+        #     color = DISASTER_COLOR
 
-        if point[2] == 1:
-            # KNOWN
-            color = KNOWN_COLOR
-        elif point[2] == 2:
-            # ALIEN
-            color = ALIEN_COLOR
-        elif point[2] == 3:
-            # DISASTER
-            color = DISASTER_COLOR
-
-        pygame.draw.circle(s, color, (int(point[0]), int(point[1])), 2)
+        ## pygame.draw.circle(s, DISASTER_COLOR, (int(point[0]), int(point[1])), 2)
 
     def tick(self):
         self.sweep_line_angle += 1

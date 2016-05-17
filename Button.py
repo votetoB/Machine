@@ -4,6 +4,8 @@ K = 1.6
 RIGHT_PANEL = 460
 FPS = 120
 
+import time
+
 
 def init_buttons(self):
     self.buttons = dict()
@@ -99,6 +101,7 @@ class Button:
         self.size = size
         self.pressed = pressed
         self.width = width
+        self.updated = True
 
     def __bool__(self):
         return self.pressed
@@ -106,10 +109,12 @@ class Button:
     def on_press(self, app, s="down"):
         if s == "down":
             self.pressed = 1 - self.pressed
+            self.updated = True
         elif s == "up":
             app.stack.append(self.text)
             if not self.checkable:
                 self.pressed = False
+            self.updated = True
 
     def write_text(self, surface, text_color):
         if len(self.text) == 0:
@@ -139,6 +144,7 @@ class Button:
             self.write_text(surface, (255, 255, 0))
         else:
             self.write_text(surface, (0, 0, 0))
+
         return surface
 
     def collides(self, point):
